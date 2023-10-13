@@ -35,6 +35,8 @@ jobs:
         run: |
           if [[ $BRANCH == 'main' ]]; then
               echo "aks=test_stage" >> "$GITHUB_ENV"
+              echo "user=test_user" >> "$GITHUB_ENV"
+              echo "dir=test_dir" >> "$GITHUB_ENV"
           fi
           if [[ $BRANCH == 'dev' ]]; then
               echo "aks=test_dev" >> "$GITHUB_ENV"
@@ -46,7 +48,10 @@ jobs:
         run: echo ${{ github.ref }}
             # Runs a single command using the runners shell
       - name: print env
-        run: echo  ${{ env.aks }}
+        run: |
+          echo  ${{ env.aks }}
+          echo  ${{ env.user }}
+          echo  ${{ env.dir }}
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
