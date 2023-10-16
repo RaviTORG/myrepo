@@ -28,11 +28,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Set env BRANCH
-        run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+    
 
       - name: Set env NEED
         run: |
+          echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
           if [[ $BRANCH == 'main' ]]; then
               echo "aks=test_stage" >> "$GITHUB_ENV"
               echo "user=test_user" >> "$GITHUB_ENV"
