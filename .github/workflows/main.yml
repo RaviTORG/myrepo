@@ -38,6 +38,6 @@ jobs:
         uses: azure/CLI@v1
         with:
           azcliversion: 2.0.72
-        inlineScript: |
-          az account show
-          az storage -h
+          script: |
+            az account show
+            az storage -h
