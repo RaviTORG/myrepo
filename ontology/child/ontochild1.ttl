@@ -9,6 +9,7 @@
   <!ENTITY wsrr "http://www.ibm.com/xmlns/prod/serviceregistry/6/1/model#">
 ]>
 
+
 <rdf:RDF
   xmlns:xsd="&xsd;"
   xmlns:rdf="&rdf;"
