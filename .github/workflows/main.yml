@@ -41,3 +41,26 @@ jobs:
           inlineScript: |
             az account show
             az storage -h
+
+      - name: install kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Get k8s context
+        uses: azure/aks-set-context@v3.2
+        with:
+          resource-group: rg-vineeta-1
+          cluster-name: aks-vineeta-new
+
+      - name: setup config map
+        run: |
+          kubectl apply configmap my-configmap --from-file=./ontology/onto.ttl
+#      - name: install helm
+#        uses: azure/setup-helm@v3
+#        with:
+#          version: 'v3.9.0'
+#
+#      - name: deploy to aks via helm
+#        run: |
+#          helm upgrade --install \
+#          ${{ github.event.repository.name }}
+
