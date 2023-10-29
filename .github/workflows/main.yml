@@ -53,7 +53,7 @@ jobs:
 
       - name: setup config map
         run: |
-          kubectl apply configmap my-configmap --from-file=./ontology/onto.ttl
+          kubectl create configmap my-configmap --from-file=./ontology/onto.ttl
 #      - name: install helm
 #        uses: azure/setup-helm@v3
 #        with:
