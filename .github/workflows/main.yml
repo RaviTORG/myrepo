@@ -51,5 +51,9 @@ jobs:
       - name: print environment
         run: echo $GITHUB_REF
 
+
+      - name: Set Target Branch as Env Var
+        run: echo "TARGET_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
+
       - name: print environment
         run: cat $GITHUB_ENV
