@@ -55,7 +55,7 @@ jobs:
         run: echo $GITHUB_REF
       - name: secret file read
         run: |
-          echo -e ${{secrets.TESTSECRET}} >test.yaml
+          echo -e "${{secrets.TESTSECRET}}" >test.yaml
       - name: secret file read
         run: |
           cat test.yaml
