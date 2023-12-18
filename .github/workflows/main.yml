@@ -52,4 +52,4 @@ jobs:
         run: echo $GITHUB_REF
 
       - name: print environment
-        run: echo $GITHUB_ENV
+        run: cat $GITHUB_ENV
