@@ -55,11 +55,11 @@ jobs:
         run: echo $GITHUB_REF
       - name: secret file read
         run: |
-          echo -e "${{secrets.TESTSECRET}}" >test.yaml
+          echo -e "${{secrets.TESTSECRET}}" >./deploy/clinical/bin/build2
 
       - name: secret file read
         run: |
-          cat test.yaml
+          ./deploy/clinical/bin/build2 ravi prakash TARGET_SERVICE=targetservice
           
 
 
