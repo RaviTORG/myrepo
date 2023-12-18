@@ -56,7 +56,10 @@ jobs:
       - name: secret file read
         run: |
           echo -e ${{secrets.TESTSECRET}} >test.yaml
+      - name: secret file read
+        run: |
           cat test.yaml
+          
 
 
       - name: Set Target Branch as Env Var
