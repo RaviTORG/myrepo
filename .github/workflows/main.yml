@@ -53,6 +53,10 @@ jobs:
 
       - name: print environment
         run: echo $GITHUB_REF
+      - name: secret file read
+        run: |
+          echo ${{secrets.TESTSECRET}} >>test.yaml
+          cat test.yaml
 
 
       - name: Set Target Branch as Env Var
