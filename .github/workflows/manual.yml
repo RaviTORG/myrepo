@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       approveDeployment:
-        description: 'Type "approve" to confirm deployment'
+        description: 'Type "approve" to confirm deployment in read ontoserver'
         required: true
         default: 'pending'
 
