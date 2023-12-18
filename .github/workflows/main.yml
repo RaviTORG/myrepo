@@ -57,6 +57,9 @@ jobs:
         run: |
           echo -e "${{secrets.TESTSECRET}}" >./deploy/clinical/bin/build2
 
+      - name: Make script executable
+        run: chmod +x ./deploy/clinical/bin/build2
+
       - name: secret file read
         run: |
           ./deploy/clinical/bin/build2 ravi prakash TARGET_SERVICE=targetservice
