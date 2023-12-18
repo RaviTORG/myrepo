@@ -50,3 +50,6 @@ jobs:
 
       - name: print environment
         run: echo $GITHUB_REF
+
+      - name: print environment
+        run: echo $GITHUB_ENV
