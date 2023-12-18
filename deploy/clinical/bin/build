@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# This script takes input parameters and prints them
+
+# Check if at least one parameter is provided
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 [parameter1] [parameter2] ..."
+    exit 1
+fi
+
+# Print all input parameters
+echo "Provided Parameters:"
+for param in "$@"
+do
+    echo "- $param"
+done
