@@ -26,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TARGET_SERVICE: targetservice
+      CLINICAL_DEPLOY_BRANCHES: "dev stage test main"
 
    
 
@@ -40,3 +41,7 @@ jobs:
 
       - name: run shell script
         run: ./deploy/clinical/bin/build ravi tripathi TARGET_SERVICE=targetservice
+
+      - name: Conditional Step
+        if: contains(env.CLINICAL_DEPLOY_BRANCHES, github.ref_name)
+        run: echo "Running on one of the specified branches"
