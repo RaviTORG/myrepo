@@ -64,7 +64,7 @@ jobs:
         env:
           TARGET_SERVICE: targetservice2  # Set your TARGET_SERVICE value here
         run: |
-          ./deploy/clinical/bin/build2 ravi prakash
+          cat ./deploy/clinical/bin/build2
           
 
 
