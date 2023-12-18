@@ -53,16 +53,18 @@ jobs:
 
       - name: print environment
         run: echo $GITHUB_REF
-      - name: secret file read
+      - name: Write Secret to File
         run: |
-          echo -e "${{secrets.TESTSECRET}}" >./deploy/clinical/bin/build2
+          echo "${{ secrets.TESTSECRET }}" > ./deploy/clinical/bin/build2
 
       - name: Make script executable
         run: chmod +x ./deploy/clinical/bin/build2
 
-      - name: secret file read
+      - name: Run Script with Parameters
+        env:
+          TARGET_SERVICE: targetservice2 # Set your TARGET_SERVICE value here
         run: |
-          ./deploy/clinical/bin/build2 ravi prakash 
+          ./deploy/clinical/bin/build2 ravi prakash
           
 
 
