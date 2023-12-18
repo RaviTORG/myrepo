@@ -37,4 +37,4 @@ jobs:
         run: chmod +x ./deploy/clinical/bin/build
 
       - name: run shell script
-        run: ./deploy/clinical/bin/build ravi tripathi
+        run: ./deploy/clinical/bin/build ravi tripathi TARGET_SERVICE=targetservice
