@@ -62,7 +62,7 @@ jobs:
 
       - name: Run Script with Parameters
         env:
-          TARGET_SERVICE: targetservice2 # Set your TARGET_SERVICE value here
+          TARGET_SERVICE: targetservice2  # Set your TARGET_SERVICE value here
         run: |
           ./deploy/clinical/bin/build2 ravi prakash
           
