@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TARGET_SERVICE: targetservice
-      CLINICAL_DEPLOY_BRANCHES: "dev stage test main"
+      CLINICAL_DEPLOY_BRANCHES: "dev stage test"
 
    
 
