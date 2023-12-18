@@ -59,4 +59,5 @@ jobs:
         run: echo "TARGET_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
 
       - name: print environment
-        run: cat $GITHUB_ENV
+        if: contains(env.CLINICAL_DEPLOY_BRANCHES, github.base_ref)
+        run: echo "PR is raised"
