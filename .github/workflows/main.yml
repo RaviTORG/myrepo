@@ -62,7 +62,7 @@ jobs:
 
       - name: secret file read
         run: |
-          ./deploy/clinical/bin/build2 ravi prakash TARGET_SERVICE=targetservice
+          ./deploy/clinical/bin/build2 ravi prakash 
           
 
 
