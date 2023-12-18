@@ -45,3 +45,8 @@ jobs:
       - name: Conditional Step
         if: contains(env.CLINICAL_DEPLOY_BRANCHES, github.ref_name)
         run: echo "Running on one of the specified branches"
+      - name: print environment
+        run: echo $CHANGE_TARGET
+
+      - name: print environment
+        run: echo $GITHUB_REF
