@@ -40,6 +40,8 @@ jobs:
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetches all history for all tags and branches
 
 
       - name: capture branch name
@@ -86,8 +88,27 @@ jobs:
         run: echo "PR is raised"
 
 
+
+      - name: Determine Next Semantic Version
+        id: semver
+        run: |
+          git fetch --tags
+          LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "Latest tag: $LATEST_TAG"
+  
+          # Assuming the latest tag is in the format vMAJOR.MINOR.PATCH
+          MAJOR=$(echo $LATEST_TAG | cut -d. -f1 | tr -dc '0-9')
+          MINOR=$(echo $LATEST_TAG | cut -d. -f2)
+          PATCH=$(echo $LATEST_TAG | cut -d. -f3 | tr -dc '0-9')
+  
+          # Increment the PATCH version
+          NEXT_PATCH=$((PATCH + 1))
+  
+          NEXT_TAG="v$MAJOR.$MINOR.$NEXT_PATCH"
+          echo "Next tag: $NEXT_TAG"
+          echo "::set-output name=next_tag::$NEXT_TAG"
       - name: create git tag
-        if: env.BRANCH == 'main1'
+        if: env.BRANCH == 'main'
         env:
 
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }} # Your GitHub username as a secret
@@ -97,7 +118,7 @@ jobs:
           branchnamegittag="${BRANCH}-v${{ github.run_number }}"
           git config user.email "jenkins@ravi.com"
           git config user.name "jenkins"
-          git tag -a "${branchnamegittag}" -m "ContinuousDeployment build ${branchnamegittag}."
+          git tag -a "${{ steps.semver.outputs.next_tag }}" -m "New version ${{ steps.semver.outputs.next_tag }}"
           git push --tags https://github.com/RaviTORG/myrepo.git
 
 
