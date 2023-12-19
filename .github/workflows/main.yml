@@ -87,7 +87,7 @@ jobs:
 
 
       - name: create git tag
-        if: env.BRANCH == 'main'
+        if: env.BRANCH == 'main1'
         env:
 
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }} # Your GitHub username as a secret
