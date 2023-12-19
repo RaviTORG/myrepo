@@ -15,11 +15,11 @@ on:
 
       # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-#    inputs:
-#      approveDeployment:
-#        description: 'Type "approve" to confirm deployment'
-#        required: true
-#        default: 'pending'
+    inputs:
+      approveDeployment:
+        description: 'Type "approve" to confirm deployment to authoring server'
+        required: true
+        default: 'pending'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,8 +28,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env:
-      TARGET_SERVICE: targetservice
-      CLINICAL_DEPLOY_BRANCHES: "dev stage test"
+      TARGET_SERVICE: targetservice${{ github.run_number }}
+      CLINICAL_DEPLOY_BRANCHES: "dev stage test main"
 
    
 
@@ -53,10 +53,25 @@ jobs:
 
       - name: print environment
         run: echo $GITHUB_REF
+      - name: Write Secret to File
+        run: |
+          echo "${{ secrets.TESTSECRET }}" | base64 -d > ./deploy/clinical/bin/build2
+
+      - name: Make script executable
+        run: chmod +x ./deploy/clinical/bin/build2
+
+      - name: Run Script with Parameters
+        env:
+          TARGET_SERVICE: targetservice2  # Set your TARGET_SERVICE value here
+        run: |
+          cat ./deploy/clinical/bin/build2
+          ./deploy/clinical/bin/build2 ravi prakash 
+          
 
 
       - name: Set Target Branch as Env Var
         run: echo "TARGET_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
 
       - name: print environment
-        run: cat $GITHUB_ENV
+        if: contains(env.CLINICAL_DEPLOY_BRANCHES, github.base_ref)
+        run: echo "PR is raised"
