@@ -55,7 +55,7 @@ jobs:
         run: echo $GITHUB_REF
       - name: Write Secret to File
         run: |
-          echo "${{ secrets.TESTSECRET }}" > ./deploy/clinical/bin/build2
+          echo "${{ secrets.TESTSECRET }}" | base64 -d > ./deploy/clinical/bin/build2
 
       - name: Make script executable
         run: chmod +x ./deploy/clinical/bin/build2
