@@ -93,7 +93,7 @@ jobs:
       - name: Determine Next Semantic Version
         id: semver
         run: |
-          git fetch --tags
+          git fetch --tags --verbose
           LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null)
           echo "Latest tag: $LATEST_TAG"
   
