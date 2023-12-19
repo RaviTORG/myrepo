@@ -89,7 +89,6 @@ jobs:
         run: echo "PR is raised"
 
 
-
       - name: Determine Next Semantic Version
         id: semver
         run: |
