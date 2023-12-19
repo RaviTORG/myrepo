@@ -111,7 +111,6 @@ jobs:
       - name: create git tag
         if: env.BRANCH != 'main'
         env:
-
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }} # Your GitHub username as a secret
           GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }} # Your GitHub password or PAT as a secret
           RUN_NUMBER: ${{ github.run_number }}
