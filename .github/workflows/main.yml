@@ -92,25 +92,23 @@ jobs:
       - name: Determine Next Semantic Version
         id: semver
         run: |
-          git fetch --tags --verbose
-          LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null)
+          git fetch --tags
+          LATEST_TAG=$(git describe --tags --match "v*" `git rev-list --tags --max-count=1` 2>/dev/null)
           echo "Latest tag: $LATEST_TAG"
   
-          # Check if there are no tags yet and set initial version if true
           if [ -z "$LATEST_TAG" ]; then
           FIRST_TAG="v1.0.0"
           echo "This is the first tag: $FIRST_TAG"
           echo "::set-output name=next_tag::$FIRST_TAG"
           else
-          # Assuming the latest tag is in the format vMAJOR.MINOR.PATCH
-          MAJOR=$(echo $LATEST_TAG | cut -d. -f1 | tr -dc '0-9')
-          MINOR=$(echo $LATEST_TAG | cut -d. -f2)
-          PATCH=$(echo $LATEST_TAG | cut -d. -f3 | tr -dc '0-9')
+          # Parse major, minor and patch version
+          MAJOR=$(echo $LATEST_TAG | sed -e "s/v\([0-9]*\)\.\([0-9]*\)\.\([0-9]*\)/\1/")
+          MINOR=$(echo $LATEST_TAG | sed -e "s/v\([0-9]*\)\.\([0-9]*\)\.\([0-9]*\)/\2/")
+          PATCH=$(echo $LATEST_TAG | sed -e "s/v\([0-9]*\)\.\([0-9]*\)\.\([0-9]*\)/\3/")
           
-          # Increment the PATCH version
+          # Increment the patch version
           NEXT_PATCH=$((PATCH + 1))
-          
-          NEXT_TAG="v$MAJOR.$MINOR.$NEXT_PATCH"
+          NEXT_TAG="v${MAJOR}.${MINOR}.${NEXT_PATCH}"
           echo "Next tag: $NEXT_TAG"
           echo "::set-output name=next_tag::$NEXT_TAG"
           fi
