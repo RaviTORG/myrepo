@@ -94,20 +94,27 @@ jobs:
         id: semver
         run: |
           git fetch --tags
-          LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+          LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null)
           echo "Latest tag: $LATEST_TAG"
   
+          # Check if there are no tags yet and set initial version if true
+          if [ -z "$LATEST_TAG" ]; then
+          FIRST_TAG="v1.0.0"
+          echo "This is the first tag: $FIRST_TAG"
+          echo "::set-output name=next_tag::$FIRST_TAG"
+          else
           # Assuming the latest tag is in the format vMAJOR.MINOR.PATCH
           MAJOR=$(echo $LATEST_TAG | cut -d. -f1 | tr -dc '0-9')
           MINOR=$(echo $LATEST_TAG | cut -d. -f2)
           PATCH=$(echo $LATEST_TAG | cut -d. -f3 | tr -dc '0-9')
-  
+          
           # Increment the PATCH version
           NEXT_PATCH=$((PATCH + 1))
-  
+          
           NEXT_TAG="v$MAJOR.$MINOR.$NEXT_PATCH"
           echo "Next tag: $NEXT_TAG"
           echo "::set-output name=next_tag::$NEXT_TAG"
+          fi
       - name: create git tag
         if: env.BRANCH != 'main'
         env:
