@@ -84,5 +84,8 @@ jobs:
       - name: print environment
         run: |
           branchnamegittag="${{env.BRANCH}}-v${{github.run_number }}"
-          echo $branchnamegittag
+          git config user.email jenkins@ravi.com
+          git config user.name jenkins
+          git tag -m "ContinuousDeployment build ${branchnamegittag}." "${branchnamegittag}"
+          git push --tags https://${{secrets.GIT_USERNAME }}: ${{secrets.GIT_PASSWORD}}@github.com/RaviTORG/myrepo.git
 
