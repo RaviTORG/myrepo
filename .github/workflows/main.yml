@@ -28,9 +28,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write
-      issues: write
-      repository-projects: write
+      contents: write
     env:
       TARGET_SERVICE: targetservice${{ github.run_number }}
       CLINICAL_DEPLOY_BRANCHES: "dev stage test main"
@@ -99,7 +97,7 @@ jobs:
           git config user.email "jenkins@ravi.com"
           git config user.name "jenkins"
           git tag -a "${branchnamegittag}" -m "ContinuousDeployment build ${branchnamegittag}."
-          git push --tags https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/RaviTORG/myrepo.git
+          git push --tags https://github.com/RaviTORG/myrepo.git
 
 
 
