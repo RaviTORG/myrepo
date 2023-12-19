@@ -9,6 +9,7 @@ on:
     branches:
       - main
       - dev
+      - test
   pull_request:
     branches:
       - main
@@ -107,6 +108,20 @@ jobs:
           NEXT_TAG="v$MAJOR.$MINOR.$NEXT_PATCH"
           echo "Next tag: $NEXT_TAG"
           echo "::set-output name=next_tag::$NEXT_TAG"
+      - name: create git tag
+        if: env.BRANCH != 'main'
+        env:
+
+          GIT_USERNAME: ${{ secrets.GIT_USERNAME }} # Your GitHub username as a secret
+          GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }} # Your GitHub password or PAT as a secret
+          RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          branchnamegittag="${BRANCH}-v${{ github.run_number }}"
+          git config user.email "jenkins@ravi.com"
+          git config user.name "jenkins"
+          git tag -a "${branchnamegittag}" -m "ContinuousDeployment build ${branchnamegittag}."
+          git push --tags https://github.com/RaviTORG/myrepo.git
+
       - name: create git tag
         if: env.BRANCH == 'main'
         env:
