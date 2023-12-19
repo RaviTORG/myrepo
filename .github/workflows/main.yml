@@ -93,7 +93,7 @@ jobs:
           GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }} # Your GitHub password or PAT as a secret
           RUN_NUMBER: ${{ github.run_number }}
         run: |
-          branchnamegittag="${BRANCH}-v${RUN_NUMBER}"
+          branchnamegittag="${BRANCH}-v${{ github.run_number }}"
           git config user.email "jenkins@ravi.com"
           git config user.name "jenkins"
           git tag -a "${branchnamegittag}" -m "ContinuousDeployment build ${branchnamegittag}."
