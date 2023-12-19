@@ -82,11 +82,16 @@ jobs:
         run: echo "PR is raised"
 
 
-      - name: print environment
+      - name: create git tag
+        env:
+
+          GIT_USERNAME: ${{ secrets.GIT_USERNAME }} # Your GitHub username as a secret
+          GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }} # Your GitHub password or PAT as a secret
+          RUN_NUMBER: ${{ github.run_number }}
         run: |
-          branchnamegittag="${{env.BRANCH}}-v${{github.run_number }}"
-          git config user.email jenkins@ravi.com
-          git config user.name jenkins
-          git tag -m "ContinuousDeployment build ${branchnamegittag}." "${branchnamegittag}"
-          git push --tags https://${{secrets.GIT_USERNAME }}:${{secrets.GIT_PASSWORD}}@github.com/RaviTORG/myrepo.git
+          branchnamegittag="${BRANCH}-v${RUN_NUMBER}"
+          git config user.email "jenkins@ravi.com"
+          git config user.name "jenkins"
+          git tag -a "${branchnamegittag}" -m "ContinuousDeployment build ${branchnamegittag}."
+          git push --tags https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/RaviTORG/myrepo.git
 
