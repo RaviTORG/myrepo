@@ -56,6 +56,7 @@ jobs:
       - name: print environment
         run: echo $CHANGE_TARGET
 
+
       - name: print environment
         run: echo $GITHUB_REF
       - name: Write Secret to File
