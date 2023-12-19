@@ -39,6 +39,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      - name: capture branch name
+        run: |
+          echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+          echo "TARGET_BRANCH=${{ GITHUB.BASE_REF}}" >> $GITHUB_ENV
+
       - name: Make script executable
         run: chmod +x ./deploy/clinical/bin/build
 
@@ -75,3 +80,9 @@ jobs:
       - name: print environment
         if: contains(env.CLINICAL_DEPLOY_BRANCHES, github.base_ref)
         run: echo "PR is raised"
+
+      - name: print environment
+        run: |
+          branchnamegittag = "${BRANCH}-v${{github.run_number }}"
+          echo $branchnamegittag
+
