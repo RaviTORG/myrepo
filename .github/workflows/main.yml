@@ -83,6 +83,6 @@ jobs:
 
       - name: print environment
         run: |
-          branchnamegittag = "${{env.BRANCH}}-v${{github.run_number }}"
+          branchnamegittag="${{env.BRANCH}}-v${{github.run_number }}"
           echo $branchnamegittag
 
