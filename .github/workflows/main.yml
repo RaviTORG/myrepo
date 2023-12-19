@@ -81,6 +81,7 @@ jobs:
         if: contains(env.CLINICAL_DEPLOY_BRANCHES, github.base_ref)
         run: echo "PR is raised"
 
+
       - name: print environment
         run: |
           branchnamegittag="${{env.BRANCH}}-v${{github.run_number }}"
