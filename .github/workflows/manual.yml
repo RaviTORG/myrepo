@@ -16,9 +16,13 @@ on:
       approveDeployment:
         description: 'Type "approve" to confirm deployment in read ontoserver'
         required: true
-        default: 'pending'
+        default: 'false'
+        options:
+          - 'true'
+          - 'false'
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+          # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
