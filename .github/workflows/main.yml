@@ -78,7 +78,7 @@ jobs:
         run: echo "TARGET_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
 
       - name: print environment-test condition
-        if: contains(env.CLINICAL_DEPLOY_BRANCHES, env.TARGET_BRANCH)
+        if: env.TARGET_BRANCH != '' && contains(env.CLINICAL_DEPLOY_BRANCHES, env.TARGET_BRANCH)
         run: echo "PR is raised"
 
 
