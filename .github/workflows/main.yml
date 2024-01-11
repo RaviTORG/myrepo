@@ -20,6 +20,11 @@ on:
         description: 'Branch to deploy'
         required: true
         default: 'feature-branch'
+      ontoserver:
+        description: 'Ontoserver'
+        required: true
+        default: 'ontoserver-test'
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -49,6 +54,7 @@ jobs:
         run: |
           echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
           echo "TARGET_BRANCH=${{ GITHUB.BASE_REF}}" >> $GITHUB_ENV
+          echo ${{github.event.inputs.branch}}
 
       - name: Make script executable
         run: chmod +x ./deploy/clinical/bin/build
