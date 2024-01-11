@@ -14,7 +14,7 @@ on:
         description: 'Type "approve" to confirm deployment to authoring server'
         required: true
         default: 'pending'
-  push:
+
 
 
 
