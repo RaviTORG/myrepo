@@ -50,11 +50,12 @@ jobs:
           ref: ${{ github.event.inputs.branch }}
 
 
-      - name: capture branch name
+      - name: capture branch name event name
         run: |
           echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
           echo "TARGET_BRANCH=${{ GITHUB.BASE_REF}}" >> $GITHUB_ENV
           echo ${{github.event.inputs.branch}}
+          echo ${{github.event_name}}
 
       - name: Make script executable
         run: chmod +x ./deploy/clinical/bin/build
