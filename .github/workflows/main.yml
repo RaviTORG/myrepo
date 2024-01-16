@@ -60,7 +60,7 @@ jobs:
         run: chmod +x ./deploy/clinical/bin/build
 
       - name: run shell script
-        run: ./deploy/clinical/bin/build ravi tripathi TARGET_SERVICE=targetservice
+        run: ./deploy/clinical/bin/build ravi tripathi TARGET_SERVICE=${{github.event.inputs.branch}}
 
       - name: Conditional Step
         run: |
