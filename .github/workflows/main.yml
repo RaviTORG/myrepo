@@ -36,7 +36,7 @@ jobs:
       contents: write
     env:
       TARGET_SERVICE: targetservice${{ github.run_number }}
-      CLINICAL_DEPLOY_BRANCHES: "dev stage test main"
+      CLINICAL_DEPLOY_BRANCHES: "'dev' 'stage' 'test' 'main'"
 
    
 
@@ -70,7 +70,7 @@ jobs:
           fi
 
       - name: Conditional Step
-        if: contains(env.CLINICAL_DEPLOY_BRANCHES, github.ref_name)
+        if: contains(env.CLINICAL_DEPLOY_BRANCHES, 'github.ref_name')
         run: echo "Running on one of the specified branches"
       - name: print environment
         run: echo $CHANGE_TARGET
