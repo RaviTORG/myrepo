@@ -64,7 +64,7 @@ jobs:
 
       - name: Conditional Step
         run: |
-          if [[ ${{github.event.inputs.branch}} == main ]]; then
+          if [[ ${{github.event.inputs.branch}} == 'main' ]]; then
             echo "main branch"
           fi
 
